@@ -76,14 +76,14 @@ class VGDatasetPrep(DatasetPrep):
 
         # Load Image Metadata
         metadata_raw_name = os.path.basename(self.metadata_filename)[:-1*len('.zip')]
-        json_file = zipfile.ZipFile(self.metadata_filename).open(metadata_raw_name)
+        json_file = zipfile.ZipFile(self.metadata_filename).open(metadata_raw_name, 'rt')
         item_info = json.load(json_file)
         self.item_keys = [item_id['id'] for item_id in item_info]
         self.item_info = dict(zip(self.item_keys, item_info))
 
         # Load object data
         objects_raw_name = os.path.basename(self.objects_filename)[:-1*len('.zip')]
-        json_file = zipfile.ZipFile(self.objects_filename).open(objects_raw_name)
+        json_file = zipfile.ZipFile(self.objects_filename).open(objects_raw_name, 'rt')
         objects_data = json.load(json_file)
         self.tags_data = {}
         for row in objects_data:
@@ -98,7 +98,7 @@ class VGDatasetPrep(DatasetPrep):
 
         # Load caption data
         captions_raw_name = os.path.basename(self.regions_filename)[:-1*len('.zip')]
-        json_file = zipfile.ZipFile(self.regions_filename).open(captions_raw_name)
+        json_file = zipfile.ZipFile(self.regions_filename).open(captions_raw_name, 'rt')
         objects_data = json.load(json_file)
         self.captions_data = {}
         for row in objects_data:
