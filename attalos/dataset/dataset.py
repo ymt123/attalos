@@ -53,13 +53,7 @@ class Dataset(object):
         # Transform image index to image_id
         item_id = self.image_ids[item_index]
         # Make sure our id's are strings
-        #if not isinstance(item_id, str):
-        #    item_id = str(item_id)
-        
-        try:
-            item_id = str(item_id, 'utf-8')
-        except:
-            raise
+        item_id = str(item_id, 'utf-8')
 
         img_feat = self.image_feats[item_index, :]
         # If we are supposed to transform tags using TextTransformer then transform tags
