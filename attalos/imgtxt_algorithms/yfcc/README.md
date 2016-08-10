@@ -19,13 +19,23 @@ Preparing the curated data is a multistep processing:
 
 4. Create the curated file using the create_curated.py file which takes a dataset iterator (requiring steps 1 and 2)
 
+5. Run actual negative sampling code
 
 ### Example Usage
 ```bash
+# Step 1
+python create_yfcc_text_json.py /path/to/yfcc_100m_hash.bz2 /path/to/yfcc100m_dataset-X.bz2
+
 # Step 2
 # Input take from http://multimedia-commons.s3-website-us-west-2.amazonaws.com/?prefix=features/image/vgg-vlad-yfcc/vgg/
 python create_hdf5_file.py /path/to/yfcc100m_dataset-X.tar
 
 # Step 3
 python create_w2v_model.py /path/to/yfcc_metadata /path/to/my_w2v_model.gz
+
+# Step 4
+PYTHONPATH=/path/to/attalos:$PYTHONPATH python create_curated.py /path/to/yfcc100m_dataset-X.tar.hdf5 /path/to/yfcc100m_dataset-X.bz2.json.gz /path/to/yfcc100m_curated_dataset-X.tar.hdf5  /path/to/my_w2v_model.gz
+
+# Step 5
+PYTHONPATH=/path/to/attalos:$PYTHONPATH python negsampling_regression.py /path/to/yfcc100m_curated_dataset-X.tar.hdf5
 ```
