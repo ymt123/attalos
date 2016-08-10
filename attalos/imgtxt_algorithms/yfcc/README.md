@@ -10,6 +10,7 @@ The files are named "yfcc100m_dataset-X.tar.gz" where X is a number from 0 throu
 
 
 Preparing the curated data is a multistep processing:
+
 1. Create the json file normally created by the attalos.preprocessing.text script
 
 2. Create the hdf5 file normally created by the attalos.preprocessing.image scripts
