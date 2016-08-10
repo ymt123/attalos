@@ -10,6 +10,14 @@ The files are named "yfcc100m_dataset-X.tar.gz" where X is a number from 0 throu
 
 
 Preparing the curated data is a multistep processing:
-1) Create the json file normally created by the attalos.preprocessing.text script
-2) Create the hdf5 file normally created by the attalos.preprocessing.image scripts
-3) Create the curated file using the create_curated.py file which takes a dataset iterator (requiring steps 1 and 2)
+1. Create the json file normally created by the attalos.preprocessing.text script
+2. Create the hdf5 file normally created by the attalos.preprocessing.image scripts
+```bash
+# Input take from http://multimedia-commons.s3-website-us-west-2.amazonaws.com/?prefix=features/image/vgg-vlad-yfcc/vgg/
+python create_hdf5_file.py /path/to/yfcc100m_dataset-X.tar
+```
+3. (Optional) Create a custom w2v model based on the image tags
+```bash
+python create_w2v_model.py /path/to/yfcc_metadata /path/to/my_w2v_model.gz
+```
+3. Create the curated file using the create_curated.py file which takes a dataset iterator (requiring steps 1 and 2)
