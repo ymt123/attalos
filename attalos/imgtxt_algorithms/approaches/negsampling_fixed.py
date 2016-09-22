@@ -79,12 +79,11 @@ class NegSamplingFixedModel(AttalosModel):
             output_size = self.one_hot.vocab_size,
             hidden_units=self.hidden_units,
             learning_rate = self.learning_rate,
-            optim_words = self.optim_words,
             wv_arr = self.w
         )
         self.test_one_hot = None
         self.test_w = None
-        super(NegSamplingModel, self).__init__()
+        super(NegSamplingFixedModel, self).__init__()
     
     def _get_ids(self, tag_ids, numSamps=[5, 10], uniform_sampling=False):
         """

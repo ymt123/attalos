@@ -17,7 +17,6 @@ class NegSamplingOptimModel(AttalosModel):
 
     def _construct_model_info(self, input_size, output_size, learning_rate, wv_arr,
                               hidden_units=[200,200],
-                              optim_words=True,
                               use_batch_norm=True):
         model_info = {}
         model_info["input"] = tf.placeholder(shape=(None, input_size), dtype=tf.float32)
@@ -52,8 +51,6 @@ class NegSamplingOptimModel(AttalosModel):
         model_info["loss"] = -(pos_loss + neg_loss)
 
         model_info["optimizer"] = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(model_info["loss"])
-        #model_info["init_op"] = tf.initialize_all_variables()
-        #model_info["saver"] = tf.train.Saver()
 
         return model_info
 
@@ -75,12 +72,11 @@ class NegSamplingOptimModel(AttalosModel):
             output_size = self.one_hot.vocab_size,
             hidden_units=self.hidden_units,
             learning_rate = self.learning_rate,
-            optim_words = self.optim_words,
             wv_arr = self.w
         )
         self.test_one_hot = None
         self.test_w = None
-        super(NegSamplingModel, self).__init__()
+        super(NegSamplingOptimModel, self).__init__()
     
     def _get_ids(self, tag_ids, numSamps=[5, 10], uniform_sampling=False):
         """
